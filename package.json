@@ -4,7 +4,8 @@
   "description": "An infinite carousel of images",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "http-server"
   },
   "repository": {
     "type": "git",
@@ -19,5 +20,8 @@
   "bugs": {
     "url": "https://github.com/adamfaraj/infinite-carousel/issues"
   },
-  "homepage": "https://github.com/adamfaraj/infinite-carousel#readme"
+  "homepage": "https://github.com/adamfaraj/infinite-carousel#readme",
+  "devDependencies": {
+    "http-server": "^0.11.1"
+  }
 }

@@ -1,3 +1,3 @@
-import infiniteCarousel from './carousel';
+import { infiniteCarousel } from './carousel.js';
 
 infiniteCarousel();
