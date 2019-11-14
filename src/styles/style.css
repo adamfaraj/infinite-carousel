@@ -1,0 +1,47 @@
+.wrapper{
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+  margin-top: 1em;
+  overflow: hidden;
+  align-items: center;
+}
+
+.top-container {
+  display: flex;
+  flex-direction: row;
+  border: 1px solid red;
+  overflow: hidden;
+}
+
+.image-container {
+  display: flex;
+  position: relative;
+}
+
+.image{
+  align-self: center;
+  width: 300px;
+  height: 200px;
+}
+
+.left{
+  margin-right: 25px;
+  cursor: pointer;
+}
+
+.right{
+  cursor: pointer;
+}
+
+.left-clicked {
+  margin-left: -500px;
+  transition-duration: 1s;
+}
+
+.left-clicked-first {
+  visibility: hidden;
+  opacity: 0;
+  margin-left: -500px;
+  transition: visibility 0s 1s, opacity 1s linear;
+}

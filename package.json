@@ -1,0 +1,23 @@
+{
+  "name": "infinite-carousel",
+  "version": "1.0.0",
+  "description": "An infinite carousel of images",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/adamfaraj/infinite-carousel.git"
+  },
+  "keywords": [
+    "carousel",
+    "infinite"
+  ],
+  "author": "Adam Faraj",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/adamfaraj/infinite-carousel/issues"
+  },
+  "homepage": "https://github.com/adamfaraj/infinite-carousel#readme"
+}
