@@ -1,4 +1,4 @@
-export const infiniteCarousel = function () {
+export const infiniteCarousel = function (array, duration) {
   var dom;
   
   var imageArray = [];
@@ -13,17 +13,10 @@ export const infiniteCarousel = function () {
 
   var initImages = () => {
 
-    imageArray[0] = new Image();
-    imageArray[0].src = "https://drivetribe.imgix.net/DYFyKEi7TF-VdelzIO1hQw?w=500&h=281&fm=pjpg&auto=compress&fit=crop&crop=faces";
-
-    imageArray[1] = new Image();
-    imageArray[1].src = "https://images.squarespace-cdn.com/content/v1/52d46dd9e4b0f63bcb07fa01/1498619786666-U2OTPN3QALSTTMB1BOC8/ke17ZwdGBToddI8pDm48kHJjM-Evnp5g-1kf5Yv15cUUqsxRUqqbr1mOJYKfIPR7LoDQ9mXPOjoJoqy81S2I8N_N4V1vUb5AoIIIbLZhVYxCRW4BPu10St3TBAUQYVKcpWKe3KzaCrFDKPR1a1Ob8xobjReaxMuaKtrvUDoDmPO9EsdBHei1w8jR6w0UZiby/tumblr_nwvwieh5Pu1tmvlkuo1_1280.jpg";
-
-    imageArray[2] = new Image();
-    imageArray[2].src = "https://speedhunters-wp-production.s3.amazonaws.com/wp-content/uploads/2015/08/11083002/2015-DA-Spotlight-James-Deane-S14-PMcG-1-1200x800.jpg";
-    
-    imageArray[3] = new Image();
-    imageArray[3].src = "https://news.formulad.com/wordpress/wp-content/uploads/2018/05/forrestwang-600x400.jpg"
+    array.forEach((img, i) => {
+      imageArray[i] = new Image();
+      imageArray[i].src = img;
+    })
   };
 
   initImages();
@@ -37,6 +30,7 @@ export const infiniteCarousel = function () {
     if (imageArray.length > 0) {
       dom.image = document.getElementsByClassName('image');
     }
+
     dom.left = document.querySelector(".left");
     dom.right = document.querySelector(".right");
   };
@@ -60,8 +54,8 @@ export const infiniteCarousel = function () {
       img.classList.add('image');
       dom.imageContainer.append(img);
       topContainerWidth += img.width;
-      // dom.imageContainer.append(img[imageArray.length - 1]);
     })
+
     dom.topContainer.style.width = `${topContainerWidth}px`;
     readyLastImage();
   }
@@ -69,10 +63,11 @@ export const infiniteCarousel = function () {
   var readyLastImage = (lastImage) => {
     if (lastImage === undefined) {
       lastImage = dom.imageContainer.lastChild.cloneNode();
+      lastImage.style.marginLeft = `-${dom.imageContainer.lastChild.width}px`;
     }
     lastImage.classList.add('image', 'last-image');
     dom.imageContainer.insertBefore(lastImage, dom.imageContainer.firstChild);
-    dom.imageContainer.firstChild.style.marginLeft = `-${dom.imageContainer.lastChild.width}px`;
+    // dom.imageContainer.firstChild.style.marginLeft = `-${dom.imageContainer.lastChild.width}px`;
   }
 
   //when user clicks left arrow
@@ -97,13 +92,14 @@ export const infiniteCarousel = function () {
 
   //when user clicks right arrow
   var onRightClicked = function() {
+    debugger;
 
     dom.imageContainer.animate([
         { transform: 'translateX(0px)' },
         { transform: `translateX(${dom.imageContainer.lastChild.width}px)` },
       ], {
-        duration: 500,
-        fill: 'none'
+        duration: duration,
+        fill: 'forwards'
     });
 
     setTimeout(function() {
@@ -113,9 +109,20 @@ export const infiniteCarousel = function () {
       let hiddenImage = document.getElementsByClassName('last-image')[0];
 
       hiddenImage.style.marginLeft = '0';
+      // dom.imageContainer.style.marginLeft = `-${dom.imageContainer.lastChild.width}px`;
       hiddenImage.classList.remove('last-image');
+      lastImage.style.marginLeft = `-${dom.imageContainer.lastChild.width}px`;
+
       readyLastImage(lastImage);
-    }, 500);
+
+      dom.imageContainer.animate([
+        { transform: `translateX(${dom.imageContainer.lastChild.width}px)`},
+        { transform: 'translate(0px)' },
+      ], {
+        duration: 0,
+        fill: 'none'
+      });
+    }, (duration));
   };
 
   //run this module!
